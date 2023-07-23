@@ -29,7 +29,7 @@ export const createCloudinaryStorage = (directory, id=1) => new CloudinaryStorag
         folder: directory,
         public_id: (req, file) => {
             const type = directory.split("/")[1]
-            if(type === "Blogs"){
+            if(type === "Products"){
             return 'IMG-' + Date.now()
             }
             if(type === "Profiles")
@@ -46,19 +46,6 @@ export const createUploader = (storage) => multer({
     limits: { fileSize: 1000000 }, // @1MB
     use_filename: true, 
     unique_filename: false
-    // fileFilter: (req, file, cb) => {
-    //     // @check file type
-    //     const fileTypes = /jpg|jpeg|png|gif/;
-    //     const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
-
-    //     // @if image type is not valid
-    //     if (!extname) {
-    //         return cb(new Error("Error: Images Only!"), false)
-    //     }
-
-    //     // @if image type is valid
-    //     cb(null, true)
-    // }
 })
 
 export const deleteImage= async(publicId) => {

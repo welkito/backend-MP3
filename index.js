@@ -24,15 +24,13 @@ app.get("/", (req, res) => {
 })
 
 // @use router
-// import AuthRouters from "./src/controllers/authentication/routers.js"
-// import ProfileRouters from "./src/controllers/profile/router.js"
-// import BlogRouters from "./src/controllers/blogs/routers.js"
-// app.use("/api/auth", AuthRouters)
-// app.use("/api/profile", ProfileRouters)
-// app.use("/api/blog", BlogRouters)
+import ProductRouters from "./src/controllers/product/router.js"
+
+app.use("/api/product",ProductRouters)
+
 
 // @global error handler
-// app.use(errorHandler)
+app.use(middleware.errorHandler)
 
 // @listen to port
 const PORT = process.env.PORT;

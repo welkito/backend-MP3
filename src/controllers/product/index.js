@@ -7,6 +7,7 @@ import { productValidationSchema,categoryValidationSchema, updateProductValidati
 import { deleteImage } from "../../helpers/uploader.js"
 import fs from "fs"
 import path from "path"
+import { url } from "inspector"
 
 //create product ( name, iamge, price, category, description ) pake formdata
 export const addProduct= async(req,res,next) =>{
@@ -273,6 +274,7 @@ export const updateProduct= async(req,res,next) =>{
         next(error)
     }
 }
+
 
 //edit category
 export const updateCategory= async(req,res,next) =>{

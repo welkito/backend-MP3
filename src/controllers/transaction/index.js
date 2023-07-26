@@ -7,6 +7,7 @@ import { USER_ALREADY_EXISTS, USER_DOES_NOT_EXISTS, INVALID_CREDENTIALS } from "
 import { deleteImage } from "../../helpers/uploader.js"
 import fs from "fs"
 import path from "path"
+import { TransactionValidationSchema } from "./validation.js"
 //buat transaction detail 
 
 //update transactions, update order sesuai transaction detail, terus send requet
@@ -28,12 +29,12 @@ export const createTransaction = async(req,res,next) =>{
         // @create transaction
         const transaction = await db.sequelize.transaction(async()=>{
             //ambil data
-            const {id,paymentTypeId,details} = req.body
+            const {paymentTypeId,details} = req.body
             //validate input
-
+            await TransactionValidationSchema(req.body)
             //bikin transaction
             const transactionData = await Transaction.create({
-                cashierId : id,
+                cashierId : req?.user?.id,
                 paymentTypeId : paymentTypeId
             })
             console.log(transactionData?.dataValues)

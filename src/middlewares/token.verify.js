@@ -5,6 +5,9 @@ export async function verifyUser(req, res, next) {
         const token = req.headers.authorization?.split(" ")[1];
         const decoded = verifyToken(token);
         //pass user information into next handler
+         // @check if user is admin
+         if (decoded?.role !== 2) throw new Error({ message : "Restricted" });
+
         req.user = decoded;
         //pass user token into next handler 
         req.token = token;

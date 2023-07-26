@@ -25,8 +25,10 @@ app.get("/", (req, res) => {
 
 // @use router
 import ProductRouters from "./src/controllers/product/router.js"
+import TransactionRouters from "./src/controllers/transaction/router.js"
 
 app.use("/api/product",ProductRouters)
+app.use("/api/transaction",TransactionRouters)
 
 
 // @global error handler

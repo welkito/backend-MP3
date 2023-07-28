@@ -14,8 +14,11 @@ export const Category = db.sequelize.define("category", {
         type : db.Sequelize.BOOLEAN,
         allowNull : false,
         defaultValue : true
+    },
+    parentId : {
+        type : db.Sequelize.INTEGER,
+        allowNull : false,
     }
-
 },{
     timestamps : false
 })
@@ -57,6 +60,14 @@ export const Product_Category = db.sequelize.define("product_category",{
         primaryKey: true,
         autoIncrement: true,
     },
+    productId : {
+        type : db.Sequelize.INTEGER,
+        allowNull : false,
+    },
+    categoryId : {
+        type : db.Sequelize.INTEGER,
+        allowNull : false,
+    }
 
 },{
     timestamps : false

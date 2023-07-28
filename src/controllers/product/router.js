@@ -9,14 +9,13 @@ const uploader = createUploader(storage)
 // @define routes
 const router = Router()
 //routes for authentication
-router.post("/category", ProductControllers.addCategory)//need
-router.post("/",uploader.single("file"), ProductControllers.addProduct)//need
+router.post("/category",verifyAdmin, ProductControllers.addCategory)//need
+router.post("/", verifyAdmin, uploader.single("file"), ProductControllers.addProduct)//need
 router.get("/category", ProductControllers.showCategory)
 router.get("/", ProductControllers.showProduct)
-router.patch("/category", ProductControllers.updateCategory)//need
-router.patch("/",uploader.single("file"), ProductControllers.updateProduct)//need
-router.delete("/category/:id",  ProductControllers.deleteCategory)//need
-router.delete("/:id",  ProductControllers.deleteProduct)//need
-// router.post("/admin",  ProductControllers.loginAdmin)
+router.patch("/category", verifyAdmin, ProductControllers.updateCategory)//need
+router.patch("/", verifyAdmin, uploader.single("file"), ProductControllers.updateProduct)//need
+router.delete("/category/:id",verifyAdmin, ProductControllers.deleteCategory)//need
+router.delete("/:id",verifyAdmin, ProductControllers.deleteProduct)//need
 
 export default router

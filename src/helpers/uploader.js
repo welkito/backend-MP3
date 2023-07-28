@@ -32,10 +32,10 @@ export const createCloudinaryStorage = (directory, id=1) => new CloudinaryStorag
             if(type === "Products"){
             return 'IMG-' + Date.now()
             }
-            if(type === "Profiles")
+            if(type === "CashierProfiles")
             return `IMG-${req?.user?.id}`
         },
-        allowedFormats: ['jpeg', 'png', 'jpg'],
+        allowedFormats: ['jpeg', 'png', 'jpg', 'gif'],
         invalidate : true
     }
 })

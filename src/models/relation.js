@@ -5,22 +5,24 @@ import { Transaction,Order,Payment } from "./transaction.js"
 // @define relation
 
 //1 cat bs punya banyak prod_cat
-Category.hasMany(Product_Category)
-Product_Category.belongsTo(Category, {as : "category"})//, { foreignKey : "idCategory" }
+Category.hasMany(Product_Category,{sourcetKey : "id", foreignKey : "categoryId"})
+Product_Category.belongsTo(Category, {targetKey : "id", foreignKey : "categoryId"})//, { foreignKey : "idCategory" }
 //1 prod bs punya banyak prod_cat
-Product.hasMany(Product_Category)
-Product_Category.belongsTo(Product, {as : "product"})//, { foreignKey : "idUser" }
+Product.hasMany(Product_Category,{sourceKey : "id", foreignKey : "productId"})
+Product_Category.belongsTo(Product, {targetKey : "id", foreignKey : "productId"})//, { foreignKey : "idUser" }
 
 //1 cat bs punya 1 parent node
-Category.hasOne(Category,{foreignKey: {
-    allowNull: true
-},as : "parent"})
+// Category.hasOne(Category,{foreignKey: {
+//     allowNull: true
+// },as : "parent"})
+Category.hasOne(Category,{sourceKey : "id", foreignKey: "parentId"})
+Category.belongsTo(Category,{targetKey : "id", foreignKey: "parentId"})
 
   User.hasMany(Transaction,{sourceKey : "id", foreignKey : "cashierId" })
   Transaction.belongsTo(User, {targetKey : "id", foreignKey : "cashierId"})//{foreignKey : {name : "cashierId"}}
 
 Payment.hasMany(Transaction, {sourceKey : "id", foreignKey : "paymentTypeId"})
-Transaction.belongsTo(Payment, {sourceKey : "id", foreignKey : "paymentTypeId"})
+Transaction.belongsTo(Payment, {targetKey : "id", foreignKey : "paymentTypeId"})
 
 //cara 1
 // Transaction.hasMany(Order, {foreignKey : {name : "transactionId"}})

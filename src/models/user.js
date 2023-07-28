@@ -14,21 +14,19 @@ export const User = db.sequelize.define("user", {
         type : db.Sequelize.STRING,
         allowNull : false
     },
-    storename : {
-        type : db.Sequelize.STRING,
-        allowNull : true
-    },
     password : {
         type : db.Sequelize.STRING,
         allowNull : false
     },
     status : {
         type : db.Sequelize.INTEGER,
-        allowNull : false
+        allowNull : false,
+        defaultValue : 1
     },
     role : {
         type : db.Sequelize.INTEGER,
-        allowNull : false
+        allowNull : false,
+        defaultValue : 1
     },
     profileURL : {
         type : db.Sequelize.STRING,

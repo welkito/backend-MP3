@@ -24,11 +24,15 @@ app.get("/", (req, res) => {
 })
 
 // @use router
+import UserRouters from "./src/controllers/authorization/router.js"
 import ProductRouters from "./src/controllers/product/router.js"
 import TransactionRouters from "./src/controllers/transaction/router.js"
+import ReportRouters from "./src/controllers/report/router.js"
 
+app.use('/api/auth',UserRouters)
 app.use("/api/product",ProductRouters)
 app.use("/api/transaction",TransactionRouters)
+app.use("/api/report",ReportRouters)
 
 
 // @global error handler

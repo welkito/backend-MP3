@@ -1,5 +1,5 @@
 import { ValidationError } from "yup"
-import { Order,Transaction,Product,Payment, User} from "../../models/relation.js"
+import { Order,Transaction,Product,Payment, User, Product_Category,Category} from "../../models/relation.js"
 import { Sequelize, Op ,QueryTypes} from "sequelize"
 import db from "../../models/index.js"
 import { USER_ALREADY_EXISTS, USER_DOES_NOT_EXISTS, INVALID_CREDENTIALS } from "../../middlewares/error.handler.js"
@@ -31,7 +31,7 @@ export const createTransaction = async(req,res,next) =>{
             //ambil data
             const {paymentTypeId,details} = req.body
             //validate input
-            await TransactionValidationSchema(req.body)
+            await TransactionValidationSchema.validate(req.body)
             //bikin transaction
             const transactionData = await Transaction.create({
                 cashierId : req?.user?.id,
@@ -83,8 +83,12 @@ export const showTransaction = async(req,res,next) =>{
             )
             //cari smua data orders based on transaction id
             const result = await Order.findAll({where : {"transactionId" : req?.params?.id}, 
-            include : Product
-               
+            include : {
+                model: Product,
+                include: {
+                    model : Product_Category,
+                    include : Category}
+              }
               })
             //return data orders, sm transactionnya
             res.status(200).json({

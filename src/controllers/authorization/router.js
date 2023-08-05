@@ -13,7 +13,7 @@ import * as AuthControllers from "./index.js"
 const router = Router()
 
 //routes for authentication
-router.get("/users",AuthControllers.showAllCashiers)//
+router.get("/users", AuthControllers.showAllCashiers)//
 router.post("/login", AuthControllers.login)//
 router.put("/forgotPass",AuthControllers.forgotPass)////
 router.patch("/resetPass", verifyUser, AuthControllers.reset)///

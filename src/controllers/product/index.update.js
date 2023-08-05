@@ -20,15 +20,15 @@ export const updateProduct= async(req,res,next) =>{
         //validation
         await updateProductValidationSchema.validate(newProduct);
         //if image attachment is true
-        if(req?.file?.path){
-            // @get current product data
-            const current = await Product?.findOne({where : { id: newProduct?.id}});
-            //code for gettin public_id
-            const deString = current.image.split("Public")[1]
-            const image  = "Public"+deString.split(".")[0]
-            //delete image product on cloudinary
-            await deleteImage(image)
-        }
+        // if(req?.file?.path){
+        //     // @get current product data
+        //     const current = await Product?.findOne({where : { id: newProduct?.id}});
+        //     //code for gettin public_id
+        //     const deString = current.image.split("Public")[1]
+        //     const image  = "Public"+deString.split(".")[0]
+        //     //delete image product on cloudinary
+        //     await deleteImage(image)
+        // }
         //update product data on sql server
         await Product?.update({
             name: newProduct?.name,
